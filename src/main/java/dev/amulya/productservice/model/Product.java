@@ -1,5 +1,8 @@
 package dev.amulya.productservice.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,12 +12,16 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+@Entity
+public class Product extends BaseModel {
+    @Id
     private Long id;
     private String title;
     private String description;
     private Double price;
-    private String category;
+
     private String imageurl;
+    @ManyToOne
+    private Category category;
 }
 

@@ -29,7 +29,7 @@ public class FakeStoreProductDto {
 
         Category category = new Category();
         category.setTitle(getCategory());
-        product.setCategory(String.valueOf(category));
+        product.setCategory(category);
         return product;
     }
 }
