@@ -5,6 +5,7 @@ import dev.amulya.productservice.dtos.FakeStoreProductDto;
 
 import dev.amulya.productservice.services.Productservice;
 import dev.amulya.productservice.model.Product;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,12 +14,14 @@ import org.springframework.web.bind.annotation.*;
 import dev.amulya.productservice.dtos.ErrorDto;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 @RestController
 public class ProductController {
 
     Productservice productservice;
 
-    public ProductController(Productservice productservice) {
+    public ProductController( @Qualifier("selfproductservice") Productservice productservice) {
         this.productservice = productservice;
     }
 
@@ -49,5 +52,10 @@ public class ProductController {
 //        return new ResponseEntity<>(errorDto, HttpStatus.valueOf(400));
 //    }
 
+    //get all the products
+    @GetMapping("/products")
+    public List<Product> getAllProducts(){
+        return productservice.getAllProducts();
+    }
 
 }
