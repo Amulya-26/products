@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.List;
 
@@ -19,8 +21,9 @@ import java.util.List;
 @NoArgsConstructor
 public class Category extends BaseModel{
     private String title;
-    @OneToMany(mappedBy = "category",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     @JsonIgnore
+    @Fetch(FetchMode.SUBSELECT)
    private List<Product> products;
 
 }

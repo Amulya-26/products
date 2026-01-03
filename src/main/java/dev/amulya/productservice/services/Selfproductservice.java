@@ -52,4 +52,5 @@ public class Selfproductservice implements Productservice{
     public List<Product> getAllProducts(){
         return productrepository.findAll();
     }
+
 }
