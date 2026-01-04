@@ -23,7 +23,7 @@ public class Category extends BaseModel{
     private String title;
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     @JsonIgnore
-    @Fetch(FetchMode.SUBSELECT)
+//   @Fetch(FetchMode.SUBSELECT)
    private List<Product> products;
 
 }

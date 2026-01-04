@@ -2,9 +2,12 @@ package dev.amulya.productservice.repositories;
 
 import dev.amulya.productservice.model.Product;
 import dev.amulya.productservice.projections.Productprojections;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
 
 public interface Productrepository extends JpaRepository<Product,Long> {
     Product findByIdIs(Long id);
@@ -17,5 +20,7 @@ public interface Productrepository extends JpaRepository<Product,Long> {
 
     @Query("select p.id, p.title from Product p where p.title = :title and p.id = :id")
     Productprojections getProductWithASpecificTitleAndId(@Param("title") String title, @Param("id") Long id);
+
+     Page<Product> findByTitleContaining(String title, Pageable pageable);
 
 }
