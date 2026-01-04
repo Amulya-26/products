@@ -9,12 +9,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.FetchMode;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class Product extends BaseModel {
+@Entity public class Product extends BaseModel implements Serializable {
     private String title;
     private String description;
     private Double price;

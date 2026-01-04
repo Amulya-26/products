@@ -12,6 +12,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
@@ -19,7 +20,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Category extends BaseModel{
+public class Category extends BaseModel implements Serializable {
     private String title;
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     @JsonIgnore

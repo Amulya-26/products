@@ -4,6 +4,8 @@ import dev.amulya.productservice.model.Category;
 import dev.amulya.productservice.model.Product;
 import dev.amulya.productservice.repositories.Categoryrepository;
 import dev.amulya.productservice.repositories.Productrepository;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,7 @@ public class Selfproductservice implements Productservice{
     }
 
     @Override
+    @Cacheable(value="products",key="#id")
     public Product getSingleProduct(Long id) {
 
         return productrepository.findByIdIs(id);
@@ -49,6 +52,7 @@ public class Selfproductservice implements Productservice{
     }
     //get all products
     @Override
+    @Cacheable(value="allproducts")
     public List<Product> getAllProducts(){
         return productrepository.findAll();
     }

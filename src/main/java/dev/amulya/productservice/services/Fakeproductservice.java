@@ -3,6 +3,7 @@ package dev.amulya.productservice.services;
 import dev.amulya.productservice.dtos.FakeStoreProductDto;
 import dev.amulya.productservice.model.Category;
 import dev.amulya.productservice.model.Product;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -14,14 +15,23 @@ public class Fakeproductservice implements Productservice {
 
     private RestTemplate restTemplate;
 
-    public Fakeproductservice(RestTemplate restTemplate) {
+    private RedisTemplate<String,Object> redisTemplate;
+
+    public Fakeproductservice(RestTemplate restTemplate,
+                              RedisTemplate<String, Object> redisTemplate) {
         this.restTemplate = restTemplate;
+        this.redisTemplate = redisTemplate;
     }
 
     @Override
     public Product getSingleProduct(Long id) {
+        Product productfromcache=(Product)redisTemplate.opsForValue().get(String.valueOf(id));
+        if(productfromcache!=null){
+            return productfromcache;
+        }
         ResponseEntity<FakeStoreProductDto> responseEntity = restTemplate.getForEntity("https://fakestoreapi.com/products/" + id, FakeStoreProductDto.class);
         FakeStoreProductDto fakeStoreProductDto = responseEntity.getBody();
+        redisTemplate.opsForValue().set(String.valueOf(id),fakeStoreProductDto.convertToProduct());
         return fakeStoreProductDto.convertToProduct();
     }
 
