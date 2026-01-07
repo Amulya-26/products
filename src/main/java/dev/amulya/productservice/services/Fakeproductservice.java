@@ -54,4 +54,8 @@ public class Fakeproductservice implements Productservice {
         return List.of();
     }
 
+    public Product deleteProduct(Long id){
+        return null;//amulya will implement this story
+    }
+
 }

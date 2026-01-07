@@ -57,4 +57,13 @@ public class Selfproductservice implements Productservice{
         return productrepository.findAll();
     }
 
+    //delete a product of given id
+    public Product deleteProduct(Long id) {
+        Product p = productrepository.findById(id).get();
+        productrepository.deleteById(id);
+        return p;
+    }
+
+
+
 }
