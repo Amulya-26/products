@@ -62,5 +62,15 @@ public class ProductController {
     public List<Product> getAllProducts(){
         return productservice.getAllProducts();
     }
+    @PutMapping("/products")
+    public Product updateProduct(@RequestBody CreateProductRequestDto productRequestDto) {
+        return productservice.createProduct(
+                productRequestDto.getTitle(),
+                productRequestDto.getDescription(),
+                productRequestDto.getImage(),
+                productRequestDto.getCategory(),
+                productRequestDto.getPrice()
+        );
+    }
 
 }
