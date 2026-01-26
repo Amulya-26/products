@@ -46,7 +46,9 @@ public class ProductController {
     }
 
     @DeleteMapping("/products/{id}")
-    public void deleteProduct(Long productId) {}
+    public Product deleteProduct(Long productId) {
+        return productservice.deleteProduct(productId);
+    }
 
 //     @ExceptionHandler(NullPointerException.class)
 //    public ResponseEntity<ErrorDto> handleNullPointerException(NullPointerException ex) {
