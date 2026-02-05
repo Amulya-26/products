@@ -77,4 +77,14 @@ public class ProductController {
         );
     }
 
+    @GetMapping("/products/proc/{id}")
+    public Product getProductByIdUsingProcedure(@PathVariable("id") Long id) {
+        return productservice.getProductByProcedure(id);
+    }
+@GetMapping("/products/description/{id}")
+    public  String getProductbByDescription(@PathVariable("id") Long id){
+        return productservice.getProductDescription(id);
+    }
+
+
 }

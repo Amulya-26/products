@@ -15,4 +15,7 @@ public interface Productservice {
     public List<Product> getAllProducts();
 
     public Product deleteProduct(Long id);
+    Product getProductByProcedure(Long id);
+    String getProductDescription(Long id);
+
 }

@@ -58,4 +58,14 @@ public class Fakeproductservice implements Productservice {
         return null;//amulya will implement this story
     }
 
+    @Override
+    public Product getProductByProcedure(Long id) {
+        return null;
+    }
+
+    @Override
+    public String getProductDescription(Long id) {
+        return "";
+    }
+
 }

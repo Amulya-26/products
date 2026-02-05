@@ -4,6 +4,8 @@ import dev.amulya.productservice.model.Category;
 import dev.amulya.productservice.model.Product;
 import dev.amulya.productservice.repositories.Categoryrepository;
 import dev.amulya.productservice.repositories.Productrepository;
+import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
@@ -62,6 +64,18 @@ public class Selfproductservice implements Productservice{
         Product p = productrepository.findById(id).get();
         productrepository.deleteById(id);
         return p;
+    }
+
+    @Override
+    @Cacheable(value = "products", key = "#id")
+    @Transactional
+    public Product getProductByProcedure(Long id) {
+        return productrepository.findByIdUsingProcedure(id);
+    }
+
+    @Transactional
+    public String getProductDescription(Long id){
+        return productrepository.getProductDescription(id);
     }
 
 

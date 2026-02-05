@@ -15,6 +15,24 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
+@NamedStoredProcedureQuery(
+        name = "Product.getDescription",              // JPA name
+        procedureName = "get_product_description",    // DB procedure name
+
+        parameters = {
+                @StoredProcedureParameter(
+                        mode = ParameterMode.IN,
+                        name = "p_id",
+                        type = Long.class
+                ),
+                @StoredProcedureParameter(
+                        mode = ParameterMode.OUT,
+                        name = "p_description",
+                        type = String.class
+                )
+        }
+)
 @Entity public class Product extends BaseModel implements Serializable {
     private String title;
     private String description;
